@@ -139,9 +139,9 @@ const managerConfigStr = JSON.stringify({
             if (!baseApi) continue;
             try {
                 var fetchUrl = baseApi
-                    .replace(':server', m.server)
-                    .replace(':type', m.type)
-                    .replace(':id', m.id)
+                    .replace(':server', encodeURIComponent(m.server))
+                    .replace(':type', encodeURIComponent(m.type))
+                    .replace(':id', encodeURIComponent(m.id))
                     .replace(':r', Math.random());
                 if (m.auth) fetchUrl += '&auth=' + m.auth;
 

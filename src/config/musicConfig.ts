@@ -24,8 +24,11 @@ export const musicPlayerConfig: MusicPlayerConfig = {
 
 	// Meting API 配置
 	meting: {
-		// Meting API 地址
-		api: "https://api.i-meto.com/meting/api?server=:server&type=:type&id=:id&r=:r",
+		// Meting API 地址。
+		// api.i-meto.com 现在返回 Cloudflare 挑战页，浏览器 fetch 拿不到 JSON。
+		// 原先的备用接口不支持 type=search（返回 unknown type）。
+		// qijieya 仍支持按关键词搜索，并返回可播放的网易云音频。
+		api: "https://api.qijieya.cn/meting/?server=:server&type=:type&id=:id&r=:r",
 		// 音乐平台：netease=网易云音乐
 		server: "netease",
 		// 类型：search 通过关键词动态搜索歌曲
@@ -34,8 +37,9 @@ export const musicPlayerConfig: MusicPlayerConfig = {
 		id: "Serial Experiments Lain",
 		// 认证 token（可选）
 		auth: "",
-		// 备用 API 配置
+		// 备用 API 配置（search 不可用时，playlist/song 等类型仍可落到这些接口）
 		fallbackApis: [
+			"https://api.i-meto.com/meting/api?server=:server&type=:type&id=:id&r=:r",
 			"https://api.injahow.cn/meting/?server=:server&type=:type&id=:id",
 			"https://api.moeyao.cn/meting/?server=:server&type=:type&id=:id",
 		],
